@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lumens Craft Media | Producción Audiovisual Profesional</title>
 
-<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -21,34 +20,123 @@
 body { background-color: var(--bg-light); color: var(--text-dark); line-height:1.7; }
 a { text-decoration:none; }
 
-/* ===== TOP NAV ===== */
-.top-nav {
+/* ===== TOP NAV (PREMIUM + MOBILE SAFE) ===== */
+.top-nav{
   position:fixed;
   top:0;
   left:0;
   width:100%;
-  background:var(--white);
+  background:rgba(255,255,255,0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
   display:flex;
+  align-items:center;
   justify-content:center;
-  gap:24px;
-  padding:14px 0;
-  box-shadow:0 5px 20px rgba(0,0,0,0.1);
+  gap:8px;
+
+  padding: calc(10px + env(safe-area-inset-top)) 12px 10px;
+
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+  border-bottom:1px solid rgba(0,0,0,0.05);
+
   z-index:999;
   transition:top 0.3s;
+
+  overflow-x:auto;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling: touch;
+
+  scroll-snap-type: x proximity;
 }
-.top-nav .nav-link { color: var(--text-dark); font-weight:600; cursor:pointer; transition:0.2s; }
-.top-nav .nav-link:hover { color:var(--cyan); }
+.top-nav::-webkit-scrollbar{display:none}
+
+.top-nav .nav-link{
+  display:inline-flex;
+  align-items:center;
+
+  color: var(--text-dark);
+  font-weight:600;
+  cursor:pointer;
+  transition:0.2s;
+
+  font-size:0.82rem;
+  line-height:1.2;
+
+  padding:8px 10px;
+  border-radius:999px;
+
+  white-space:nowrap;
+  flex-shrink:0;
+
+  scroll-snap-align: start;
+}
+.top-nav .nav-link:hover{
+  color:var(--cyan);
+  background:rgba(39,188,208,0.10);
+}
 
 /* ===== HERO ===== */
-.hero { min-height:90vh; display:flex; align-items:center; justify-content:center; text-align:center; padding:60px 20px; animation: fadeIn 1.2s ease; margin-top:60px; }
+.hero { min-height:90vh; display:flex; align-items:center; justify-content:center; text-align:center; padding:60px 20px; animation: fadeIn 1.2s ease; margin-top:90px; }
 .hero-content { max-width:900px; }
 .logo { max-width:250px; margin:0 auto 30px; display:block; transition: transform 0.5s ease; }
 .logo:hover { transform: scale(1.05); }
 .hero h1 { font-size:3rem; margin-bottom:20px; animation: fadeInUp 1s ease; }
 .hero h1 span { color: var(--cyan); }
 .hero p { font-size:1.2rem; color: var(--text-gray); margin-bottom:35px; animation: fadeInUp 1s ease 0.3s; }
-.btn { display:inline-block; background-color: var(--cyan); color:#fff; padding:16px 36px; font-weight:600; border-radius:40px; box-shadow:0 10px 25px rgba(39,188,208,0.35); transition:0.3s ease; animation: fadeInUp 1s ease 0.6s; }
-.btn:hover { opacity:0.9; transform: translateY(-3px); }
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background-color: var(--cyan);
+  color:#fff;
+  padding:16px 36px;
+  font-weight:600;
+  border-radius:40px;
+  box-shadow:0 10px 25px rgba(39,188,208,0.35);
+  transition:0.3s ease;
+  animation: fadeInUp 1s ease 0.6s;
+  text-align:center;
+  border:none;
+  cursor:pointer;
+  min-height:54px;
+}
+.btn-outline{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:16px 36px;
+  border-radius:40px;
+  font-weight:700;
+  border:2px solid rgba(39,188,208,0.65);
+  color: var(--cyan);
+  transition:0.25s;
+  text-align:center;
+  min-height:54px;
+}
+.btn:hover, .btn-outline:hover { opacity:0.95; transform: translateY(-2px); }
+
+/* HERO buttons aligned 100% */
+.hero-actions{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  width:100%;
+  max-width:720px;
+  margin:0 auto;
+}
+.hero-btn{
+  width:260px;
+  min-height:54px;
+  padding:0 28px;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 
 /* ===== SECTIONS ===== */
 section { padding:60px 20px; max-width:1200px; margin:auto; }
@@ -58,20 +146,6 @@ h2 { text-align:center; font-size:2.4rem; color:var(--cyan); margin-bottom:16px;
 /* ===== VIDEO ===== */
 .video-wrapper { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:18px; box-shadow:0 20px 40px rgba(0,0,0,0.15); max-width:760px; margin:auto; animation: fadeIn 1s ease 0.3s; }
 .video-wrapper iframe { position:absolute; top:0; left:0; width:100%; height:100%; }
-
-/* ===== SERVICES ===== */
-.services { display:grid; grid-template-columns: repeat(3, 1fr); gap:30px; }
-.service-box { background: var(--white); padding: 30px; border-radius: 20px; box-shadow: 0 12px 30px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; animation: fadeInUp 1s ease; }
-.service-box:hover { transform: translateY(-5px); box-shadow: 0 18px 35px rgba(0,0,0,0.15); }
-.service-box h3 { color:var(--cyan); margin-bottom:14px; font-size:1.35rem; }
-.service-box p { color:var(--text-gray); }
-
-.service-box:nth-child(1) { animation-delay:0.1s; }
-.service-box:nth-child(2) { animation-delay:0.2s; }
-.service-box:nth-child(3) { animation-delay:0.3s; }
-.service-box:nth-child(4) { animation-delay:0.4s; }
-.service-box:nth-child(5) { animation-delay:0.5s; }
-.service-box:nth-child(6) { animation-delay:0.6s; }
 
 /* ===== PLANS ===== */
 .plans { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:40px; }
@@ -88,6 +162,33 @@ h2 { text-align:center; font-size:2.4rem; color:var(--cyan); margin-bottom:16px;
 .benefit-toggle:hover { background:#1ea0b0; }
 .benefit-content { display:none; background:#f0f8fa; color:var(--text-dark); padding:12px 16px; border-radius:12px; margin-top:6px; font-size:0.95rem; line-height:1.5; }
 
+/* ===== QUÉ HACEMOS (VISUAL CON IMÁGENES) ===== */
+.gallery{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:18px;
+}
+.work{
+  background:var(--white);
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 12px 30px rgba(0,0,0,0.08);
+  transition:transform 0.25s ease, box-shadow 0.25s ease;
+}
+.work:hover{
+  transform: translateY(-4px);
+  box-shadow:0 18px 35px rgba(0,0,0,0.14);
+}
+.work img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  display:block;
+}
+.work .work-body{ padding:14px 16px; }
+.work .work-body h4{ margin:0 0 4px 0; font-size:1rem; color:var(--text-dark); }
+.work .work-body p{ margin:0; font-size:0.9rem; color:var(--text-gray); }
+
 /* ===== TEAM ===== */
 .team { display:flex; justify-content:center; gap:40px; flex-wrap:wrap; }
 .team-member { text-align:center; max-width:250px; cursor:pointer; animation: fadeInUp 1s ease; position:relative; }
@@ -102,6 +203,26 @@ h2 { text-align:center; font-size:2.4rem; color:var(--cyan); margin-bottom:16px;
 .modal-content p { color:var(--text-dark); line-height:1.6; }
 .modal-close { position:absolute; top:10px; right:15px; font-size:1.5rem; font-weight:bold; cursor:pointer; }
 
+/* ===== TESTIMONIALS ===== */
+.testimonials { display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; }
+.quote{
+  background:var(--white);
+  border-radius:18px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.08);
+  padding:18px;
+}
+.quote p{ color:var(--text-dark); margin-bottom:12px; }
+.quote .who{ display:flex; align-items:center; gap:10px; }
+.quote .avatar{
+  width:44px;height:44px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;
+  color:#fff;
+  background:rgba(39,188,208,0.95);
+}
+.quote .who strong{ display:block; line-height:1.1; }
+.quote .who span{ display:block; font-size:0.85rem; color:var(--text-gray); }
+
 /* ===== TIPS / NEWS ===== */
 .tips { display:flex; overflow-x:auto; gap:12px; padding-bottom:10px; margin-top:20px; scroll-behavior: smooth; }
 .tip-card { min-width:200px; max-width:220px; background:var(--white); border-radius:14px; padding:14px; box-shadow:0 8px 20px rgba(0,0,0,0.1); flex-shrink:0; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor:pointer; }
@@ -110,31 +231,149 @@ h2 { text-align:center; font-size:2.4rem; color:var(--cyan); margin-bottom:16px;
 .tip-card h4 { color: var(--text-dark); font-size:0.95rem; margin-bottom:4px; line-height:1.2; }
 .tip-card p { color:var(--text-gray); font-size:0.8rem; margin:0; }
 
-/* ===== CONTACT ===== */
-.contact { text-align:center; background:var(--white); border-radius:24px; padding:60px 20px; animation: fadeIn 1s ease; }
+/* ===== CONTACT (PRO) ===== */
+.contact { text-align:center; background:var(--white); border-radius:24px; padding:60px 20px; animation: fadeIn 1s ease; box-shadow:0 12px 30px rgba(0,0,0,0.08); }
+.contact-grid{
+  display:grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap:20px;
+  margin-top:22px;
+  text-align:left;
+  max-width:980px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.card{
+  background:var(--white);
+  border-radius:18px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.06);
+  padding:22px;
+  border:1px solid rgba(0,0,0,0.05);
+}
+.form-row{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:12px;
+}
+.field label{
+  display:block;
+  font-size:0.9rem;
+  color:var(--text-gray);
+  margin-bottom:6px;
+  font-weight:600;
+}
+.field input, .field select, .field textarea{
+  width:100%;
+  border:1px solid rgba(0,0,0,0.12);
+  border-radius:12px;
+  padding:12px 12px;
+  font-size:0.95rem;
+  outline:none;
+  background:#fff;
+}
+.field input:focus, .field select:focus, .field textarea:focus{
+  border-color: rgba(39,188,208,0.7);
+  box-shadow:0 0 0 4px rgba(39,188,208,0.12);
+}
+.field textarea{ min-height:120px; resize:vertical; }
+
+.form-status{
+  display:none;
+  margin-top:12px;
+  padding:12px 14px;
+  border-radius:12px;
+  font-size:0.95rem;
+}
+.form-status.ok{
+  display:block;
+  background: rgba(39,188,208,0.10);
+  border:1px solid rgba(39,188,208,0.25);
+  color: var(--text-dark);
+}
+.form-status.err{
+  display:block;
+  background: rgba(255,0,0,0.06);
+  border:1px solid rgba(255,0,0,0.14);
+  color: var(--text-dark);
+}
+
+/* ===== FOOTER ===== */
 footer { text-align:center; padding:30px; color:var(--text-gray); font-size:0.9rem; }
-.whatsapp-float { position:fixed; bottom:20px; right:20px; background:#25D366; color:white; padding:14px 18px; border-radius:50px; font-weight:600; box-shadow:0 10px 25px rgba(0,0,0,0.25); display:none; z-index:1000; }
+
+/* ===== WHATSAPP FLOAT (YOUR ICON) ===== */
+.whatsapp-float{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  background:#25D366;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 10px 25px rgba(0,0,0,0.25);
+  z-index:1000;
+  transition:transform .2s ease, opacity .2s ease;
+}
+.whatsapp-float:hover{ transform: translateY(-2px); }
+.whatsapp-float img{
+  width:36px;
+  height:36px;
+  object-fit:contain;
+  display:block;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.25));
+}
+
 
 /* ===== ANIMATIONS ===== */
 @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
 @keyframes fadeInUp { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
 
 /* ===== RESPONSIVE ===== */
-@media(max-width:1024px){ .services{grid-template-columns:repeat(2,1fr);} .team{gap:30px;} .plans{grid-template-columns:1fr;} }
-@media(max-width:600px){ .hero h1{font-size:2.1rem;} .services{grid-template-columns:1fr;} .btn{width:100%;max-width:320px;} .whatsapp-float{display:block;} .tips{overflow-x:auto;} .tip-card {min-width:160px; max-width:180px; padding:12px;} .tip-card img {height:100px; margin-bottom:6px;} .tip-card h4 {font-size:0.85rem;} .tip-card p {font-size:0.75rem;} }
+@media(max-width:1024px){
+  .plans{grid-template-columns:1fr;}
+  .gallery{ grid-template-columns: 1fr 1fr; }
+  .testimonials{ grid-template-columns: 1fr; }
+  .contact-grid{ grid-template-columns: 1fr; }
+  .form-row{ grid-template-columns: 1fr; }
+  .team{gap:30px;}
+}
+@media(max-width:600px){
+  .hero h1{font-size:2.1rem;}
+  .tips{overflow-x:auto;}
+  .tip-card {min-width:160px; max-width:180px; padding:12px;}
+  .tip-card img {height:100px; margin-bottom:6px;}
+  .tip-card h4 {font-size:0.85rem;}
+  .tip-card p {font-size:0.75rem;}
 
+  .top-nav{
+    gap:6px;
+    padding: calc(8px + env(safe-area-inset-top)) 10px 8px;
+  }
+  .top-nav .nav-link{
+    font-size:0.74rem;
+    padding:7px 9px;
+  }
+
+  .hero-btn{
+    width:100%;
+    max-width:320px;
+  }
+}
 </style>
 </head>
 <body>
 
 <!-- TOP NAV -->
 <div class="top-nav">
-  <span class="nav-link" href="#services">Qué hacemos</span>
-  <span class="nav-link" href="#plans">Planes y procesos</span>
-  <span class="nav-link" href="#why-us">Por qué nosotros</span>
-  <span class="nav-link" href="#team">Quiénes somos</span>
-  <span class="nav-link" href="#rssTips">Tips & Noticias</span>
-  <span class="nav-link" href="#contacto">Contacto</span>
+  <a class="nav-link" href="#services">Qué hacemos</a>
+  <a class="nav-link" href="#plans">Planes</a>
+  <a class="nav-link" href="#why-us">Por qué</a>
+  <a class="nav-link" href="#team">Equipo</a>
+  <a class="nav-link" href="#testimonios">Testimonios</a>
+  <a class="nav-link" href="#rssTips">Tips</a>
+  <a class="nav-link" href="#contacto">Contacto</a>
 </div>
 
 <!-- HERO -->
@@ -143,7 +382,11 @@ footer { text-align:center; padding:30px; color:var(--text-gray); font-size:0.9r
     <img src="https://i.imgur.com/S1403E3.png" alt="Lumens Craft Media Logo" class="logo">
     <h1>Producción audiovisual que impulsa <span>tu marca</span></h1>
     <p>Equipo profesional: cámaras, luces, audio y dron.<br>Servicio 360° para empresas e inmobiliarias en San Pedro Sula, Honduras.</p>
-    <a href="https://wa.me/50496853557" class="btn" target="_blank" rel="noopener">Cotizá tu proyecto</a>
+
+    <div class="hero-actions">
+      <a href="https://wa.me/50496853557" class="btn hero-btn" target="_blank" rel="noopener">Cotiza tu proyecto</a>
+      <a href="#contacto" class="btn-outline hero-btn">Enviar mensaje</a>
+    </div>
   </div>
 </div>
 
@@ -156,28 +399,70 @@ footer { text-align:center; padding:30px; color:var(--text-gray); font-size:0.9r
   </div>
 </section>
 
-<!-- SERVICES -->
+<!-- QUÉ HACEMOS (ÚNICA SECCIÓN) -->
 <section id="services">
-  <h2>¿Qué hacemos?</h2>
+  <h2>Qué hacemos</h2>
   <p class="section-desc">Producción audiovisual estratégica enfocada en resultados reales.</p>
-  <div class="services">
-    <div class="service-box"><h3>Producción Audiovisual</h3><p>Grabaciones profesionales con cámaras, iluminación y audio de alta calidad.</p></div>
-    <div class="service-box"><h3>Edición de Video</h3><p>Edición profesional y creativa optimizada para redes y publicidad.</p></div>
-    <div class="service-box"><h3>Manejo de Redes</h3><p>Gestión de contenido estratégico para crecer tu marca constantemente.</p></div>
-    <div class="service-box"><h3>Tomas con Dron</h3><p>Imágenes aéreas impactantes para proyectos inmobiliarios y corporativos.</p></div>
-    <div class="service-box"><h3>Producción de Podcast</h3><p>Podcast profesional a 4K o 1080p con micrófonos para invitados y host.</p></div>
-    <div class="service-box"><h3>Creación de Sitios Web</h3><p>Desarrollo de sitios web profesionales y responsivos según tus necesidades.</p></div>
+
+  <div class="gallery">
+    <div class="work">
+      <img src="https://i.imgur.com/7PvdU2G.jpeg" alt="Producción Audiovisual">
+      <div class="work-body">
+        <h4>Producción Audiovisual</h4>
+        <p>Grabaciones profesionales con cámaras, iluminación y audio de alta calidad.</p>
+      </div>
+    </div>
+
+    <div class="work">
+      <img src="https://www.tuaventura.com/wp-content/uploads/2024/09/editing-1141505_1280.jpg" alt="Edición de Video">
+      <div class="work-body">
+        <h4>Edición de Video</h4>
+        <p>Edición profesional y creativa optimizada para redes y publicidad.</p>
+      </div>
+    </div>
+
+    <div class="work">
+      <img src="https://i.imgur.com/P2MYrtw.png" alt="Manejo de Redes">
+      <div class="work-body">
+        <h4>Manejo de Redes</h4>
+        <p>Gestión de contenido estratégico para crecer tu marca constantemente.</p>
+      </div>
+    </div>
+
+    <div class="work">
+      <img src="https://i.imgur.com/IuZ8oVE.jpeg" alt="Tomas con Dron">
+      <div class="work-body">
+        <h4>Tomas con Dron</h4>
+        <p>Imágenes aéreas impactantes para proyectos inmobiliarios y corporativos.</p>
+      </div>
+    </div>
+
+    <div class="work">
+      <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1200&q=70" alt="Producción de Podcast">
+      <div class="work-body">
+        <h4>Producción de Podcast</h4>
+        <p>Podcast profesional a 4K o 1080p con micrófonos para invitados y host.</p>
+      </div>
+    </div>
+
+    <div class="work">
+      <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=70" alt="Creación de Sitios Web">
+      <div class="work-body">
+        <h4>Creación de Sitios Web</h4>
+        <p>Desarrollo de sitios web profesionales y responsivos según tus necesidades.</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- PLANS -->
 <section id="plans">
   <h2>Planes y procesos</h2>
-  <p class="section-desc">Elegí el plan que se ajuste a tus necesidades. Todos nuestros servicios se entregan en tiempo y forma profesional.</p>
+  <p class="section-desc">Elige el plan que se ajuste a tus necesidades. Todos nuestros servicios se entregan en tiempo y forma profesional.</p>
   <div class="plans">
     <div class="plan-card"><h4>Plan Básico</h4><p>Producción y edición de videos. El cliente se encarga de publicar el contenido en sus redes.</p></div>
     <div class="plan-card"><h4>Plan Pro</h4><p>Producción y edición + publicación en tus redes. Nosotros nos encargamos de todo.</p></div>
-    <div class="plan-card"><h4>Plan 360</h4><p>Producción, edición, publicación y generación de contenido extra como ads. Nosotros manejamos tu cuenta completamente.</p></div>
+    <div class="plan-card"><h4>Plan 360</h4><p>Producción, edición, publicación y contenido extra como ads. Manejamos tu cuenta completamente.</p></div>
   </div>
 </section>
 
@@ -233,6 +518,47 @@ footer { text-align:center; padding:30px; color:var(--text-gray); font-size:0.9r
   </div>
 </section>
 
+<!-- TESTIMONIALS -->
+<section id="testimonios">
+  <h2>Lo que dicen nuestros clientes</h2>
+  <p class="section-desc">Experiencias de clientes que buscaban verse más profesionales y vender más con contenido.</p>
+
+  <div class="testimonials">
+    <div class="quote">
+      <p>“La producción se sintió premium. El video nos ayudó a presentar la marca con más confianza y profesionalismo.”</p>
+      <div class="who">
+        <div class="avatar">A</div>
+        <div>
+          <strong>Inmobiliaria</strong>
+          <span>San Pedro Sula</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="quote">
+      <p>“Excelente comunicación y entrega rápida. El contenido para redes quedó con un estilo muy limpio y moderno.”</p>
+      <div class="who">
+        <div class="avatar">C</div>
+        <div>
+          <strong>Café San Pedro</strong>
+          <span>Retail / Gastronomía</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="quote">
+      <p>“Nos gustó que no solo grabaron: propusieron estructura y enfoque. Se notó el nivel de edición.”</p>
+      <div class="who">
+        <div class="avatar">V</div>
+        <div>
+          <strong>Clínica</strong>
+          <span>Servicios</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- TIPS / NEWS -->
 <section id="rssTips">
   <h2>Tips & Noticias</h2>
@@ -244,10 +570,82 @@ footer { text-align:center; padding:30px; color:var(--text-gray); font-size:0.9r
 <section id="contacto">
   <div class="contact">
     <h2>¿Hablemos de tu proyecto?</h2>
-    <p class="section-desc">Contanos tu idea y creemos juntos contenido audiovisual de alto nivel.</p>
-    <a href="https://wa.me/50496853557" class="btn" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
-    <p style="margin-top:14px; font-size:0.95rem; color:#666;">Respondemos rápido por WhatsApp</p>
-    <p style="margin-top:18px;">📍 San Pedro Sula, Honduras</p>
+    <p class="section-desc">Cuéntanos tu idea y creemos juntos contenido audiovisual de alto nivel.</p>
+
+    <div class="contact-grid">
+      <!-- FORM -->
+      <div class="card">
+        <h3 style="color:var(--cyan); margin-bottom:10px;">Envíanos un mensaje</h3>
+        <p style="color:var(--text-gray); margin-bottom:14px; font-size:0.95rem;">
+          Te responderemos a <strong>lumenscraftmedia@gmail.com</strong>.
+        </p>
+
+        <form id="contactForm" action="https://formsubmit.co/lumenscraftmedia@gmail.com" method="POST">
+          <input type="text" name="_honey" style="display:none">
+          <input type="hidden" name="_subject" value="Nuevo mensaje desde Lumens Craft Media">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+
+          <div class="form-row">
+            <div class="field">
+              <label>Nombre</label>
+              <input name="Nombre" type="text" placeholder="Tu nombre" required>
+            </div>
+            <div class="field">
+              <label>Email</label>
+              <input name="Email" type="email" placeholder="tunombre@correo.com" required>
+            </div>
+          </div>
+
+          <div class="form-row" style="margin-top:12px;">
+            <div class="field">
+              <label>WhatsApp (opcional)</label>
+              <input name="WhatsApp" type="tel" placeholder="+504 ____ ____">
+            </div>
+            <div class="field">
+              <label>Tipo de proyecto</label>
+              <select name="Tipo de proyecto" required>
+                <option value="" selected disabled>Selecciona una opción</option>
+                <option>Producción Audiovisual</option>
+                <option>Edición de Video</option>
+                <option>Manejo de Redes</option>
+                <option>Tomas con Dron</option>
+                <option>Producción de Podcast</option>
+                <option>Creación de Sitios Web</option>
+                <option>Otro</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field" style="margin-top:12px;">
+            <label>Mensaje</label>
+            <textarea name="Mensaje" placeholder="Cuéntanos qué necesitas, fechas, presupuesto aproximado, etc." required></textarea>
+          </div>
+
+          <button class="btn" type="submit" style="margin-top:12px; width:100%;">Enviar mensaje</button>
+
+          <div id="formStatus" class="form-status"></div>
+
+          <p style="margin-top:10px; font-size:0.85rem; color:#666;">
+            Si prefieres respuesta inmediata, usa WhatsApp.
+          </p>
+        </form>
+      </div>
+
+      <!-- WHATSAPP / INFO -->
+      <div class="card" style="text-align:center;">
+        <h3 style="color:var(--cyan); margin-bottom:10px;">¿Prefieres WhatsApp?</h3>
+        <p style="color:var(--text-gray); margin-bottom:14px; font-size:0.95rem;">
+          Respuesta rápida por WhatsApp.
+        </p>
+
+        <a href="https://wa.me/50496853557" class="btn" style="width:100%;" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+        <a href="mailto:lumenscraftmedia@gmail.com" class="btn-outline" style="margin-top:12px; width:100%;">Enviar correo</a>
+
+        <p style="margin-top:18px;">📍 San Pedro Sula, Honduras</p>
+        <p style="margin-top:6px; color:#666; font-size:0.9rem;">Horario: L–S (8:00am – 6:00pm)</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -255,7 +653,10 @@ footer { text-align:center; padding:30px; color:var(--text-gray); font-size:0.9r
   Lumens Craft Media © 2026<br>Producción audiovisual profesional en Honduras
 </footer>
 
-<a href="https://wa.me/50496853557" class="whatsapp-float" target="_blank">WhatsApp</a>
+<!-- WhatsApp Floating -->
+<a href="https://wa.me/50496853557" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <img src="https://i.imgur.com/cG7SabX.png" alt="WhatsApp">
+</a>
 
 <!-- MODALS -->
 <div class="modal" id="modalAnuar">
@@ -294,26 +695,33 @@ async function loadRSS(){
   const response = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://petapixel.com/feed/');
   const data = await response.json();
   const container = document.querySelector('#rssTips .tips');
-  
+
+  if(!data || !data.items) return;
+
   data.items.slice(0,5).forEach(item=>{
     let img = item.thumbnail || item.enclosure?.link;
     if(!img){
-      const imgMatch = item.content.match(/<img.*?src="(.*?)"/);
-      img = imgMatch ? imgMatch[1] : 'https://images.unsplash.com/photo-1518770660439-4636190af475';
+      const imgMatch = item.content?.match(/<img.*?src="(.*?)"/);
+      img = imgMatch ? imgMatch[1] : 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=70';
     }
     const card = document.createElement('div');
     card.className='tip-card';
-    card.innerHTML = `<img src="${img}"><div class="tip-content"><h4>${item.title}</h4><p>${item.pubDate.slice(0,10)}</p></div>`;
+    card.innerHTML = `<img src="${img}" alt=""><div class="tip-content"><h4>${item.title}</h4><p>${String(item.pubDate).slice(0,10)}</p></div>`;
     container.appendChild(card);
   });
 }
 loadRSS();
 
 // Smooth scroll
-document.querySelectorAll('.top-nav .nav-link').forEach(link=>{
-  link.addEventListener('click',()=>{
-    const target = document.querySelector(link.getAttribute('href'));
-    target.scrollIntoView({behavior:'smooth', block:'start'});
+document.querySelectorAll('.top-nav .nav-link, .btn-outline[href^="#"]').forEach(link=>{
+  link.addEventListener('click',(e)=>{
+    const href = link.getAttribute('href');
+    if(!href || !href.startsWith('#')) return;
+    e.preventDefault();
+    const target = document.querySelector(href);
+    if(target){
+      target.scrollIntoView({behavior:'smooth', block:'start'});
+    }
   });
 });
 
@@ -322,10 +730,44 @@ let lastScroll = 0;
 const nav = document.querySelector('.top-nav');
 window.addEventListener('scroll', ()=>{
   const currentScroll = window.pageYOffset;
-  if(currentScroll > lastScroll && currentScroll > 100){ nav.style.top='-70px'; }
+  if(currentScroll > lastScroll && currentScroll > 100){ nav.style.top='-120px'; }
   else { nav.style.top='0'; }
   lastScroll = currentScroll;
 });
+
+// Form submit without redirect (AJAX)
+const form = document.getElementById('contactForm');
+const statusBox = document.getElementById('formStatus');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  statusBox.className = 'form-status ok';
+  statusBox.textContent = 'Enviando...';
+
+  try{
+    const formData = new FormData(form);
+
+    const res = await fetch(form.action, {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if(res.ok){
+      form.reset();
+      statusBox.className = 'form-status ok';
+      statusBox.textContent = '✅ Listo. Recibimos tu mensaje y te responderemos pronto.';
+    }else{
+      statusBox.className = 'form-status err';
+      statusBox.textContent = '❌ No se pudo enviar en este momento. Intenta de nuevo o usa WhatsApp.';
+    }
+  }catch(err){
+    statusBox.className = 'form-status err';
+    statusBox.textContent = '❌ Error de conexión. Revisa tu internet o usa WhatsApp.';
+  }
+});
 </script>
+
 </body>
 </html>
